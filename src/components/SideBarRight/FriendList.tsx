@@ -12,6 +12,9 @@ import Avatar from '@mui/material/Avatar';
 function FriendList() {
     const { data, isLoading } = useFetch();
 
+    
+
+
     if (isLoading) {
         return (
             <Box sx={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
@@ -19,9 +22,11 @@ function FriendList() {
             </Box>
         );
     };
+    
     return (
         <div>{
-            data.results.map(item => {
+            
+            data && data.results && data.results.map(item => { // добавляем проверку на существование data и на data.results
                 return <div>
                     <ListItem alignItems="flex-start" sx={{
                         cursor: 'pointer',

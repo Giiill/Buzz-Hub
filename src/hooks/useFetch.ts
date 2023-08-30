@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 
 function useFetch() {
-    const [data, setData] = useState();
+    interface IData {
+        results?: any[]; // указываем что объект results имеет тип массив произвольных чисел, и его наличие не является обязательным для data
+    };
+    const [data, setData] = useState<IData>(); // хук useState запускается с интерфейсом IData для переменной data
 
     useEffect(() => {
         fetch('https://swapi.dev/api/people')
