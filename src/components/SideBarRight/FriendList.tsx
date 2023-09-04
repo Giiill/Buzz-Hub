@@ -1,4 +1,3 @@
-import useFetch from "../../hooks/useFetch";
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import styled from "@emotion/styled";
@@ -6,14 +5,13 @@ import Divider from '@mui/material/Divider';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
+import { UserContext } from '../../context/userContext';
+import { useContext } from 'react';
 
 
 
 function FriendList() {
-    const { data, isLoading } = useFetch();
-
-    
-
+    const {data, isLoading} = useContext(UserContext);
 
     if (isLoading) {
         return (
@@ -25,8 +23,8 @@ function FriendList() {
     
     return (
         <div>{
-            
-            data && data.results && data.results.map(item => { // добавляем проверку на существование data и на data.results
+            // добавляем проверку на существование data и на data.results и указываем что ожидаем от item тип данных string
+            data && data.results && data.results.map((item: { name: string}) => { 
                 return <div>
                     <ListItem alignItems="flex-start" sx={{
                         cursor: 'pointer',
@@ -36,7 +34,6 @@ function FriendList() {
                         },
                     }}>
                         <ListItemAvatar>
-                            {/* <Avatar alt={item.name} src="/static/images/avatar/2.jpg" />   */}
                             <Avatar alt={item.name} src="/static/images/avatar/1.jpg" />
                         </ListItemAvatar>
                         <ItemName>{item.name}</ItemName>
@@ -46,6 +43,7 @@ function FriendList() {
             })
         }</div>
     );
+
 }
 
 export default FriendList;

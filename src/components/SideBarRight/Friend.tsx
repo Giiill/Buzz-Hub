@@ -21,7 +21,7 @@ function Friend() {
             overflow: 'hidden'
 
         }}>
-            <Box sx={{ flexGrow: 1,  }}>
+            <Box sx={{ flexGrow: 1, }}>
                 <AppBar position="static">
                     <Toolbar sx={{
                         backgroundColor: 'white',
