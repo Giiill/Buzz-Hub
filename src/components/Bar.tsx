@@ -13,12 +13,18 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { UserContext } from '../context/userContext';
 import { useContext } from 'react';
+import { GlobalStylesContext } from '../context/globalStyles';
 
 function Bar() {
   const { data } = useContext(UserContext);
+  // добавляем ! так как TS ругается что нет уверености что данный пропс существует
+  // в типе GlobalStylesProps | undefined, поэтому ставим ! говорим что мы точно уверенны
+  // что данный пропс будет определен и не вызовет ошибку.
+  const { primary } = useContext(GlobalStylesContext)!; 
+  const { secondary } = useContext(GlobalStylesContext)!;
   return (
-    <Box sx={{ flexGrow: 1, backgroundColor: '#0050B3' }}>
-      <AppBar position="static">
+    <Box> 
+      <AppBar position="static" style={{backgroundColor: primary}} >
         <Toolbar sx={{ justifyContent: 'flex-end' }}>
           <Search>
             <SearchIconWrapper>
@@ -37,8 +43,8 @@ function Bar() {
               color="inherit"
             >
               <AccountCircle />
-              
-              <Typography sx={{
+
+              <Typography style={{color: secondary}} sx={{
                 paddingLeft: 1  
               }}>{data && data.results && data.results[0] ? data.results[0].name : 'downloading'}</Typography> {/* условия на существования data, data.results, data.results[0]*/} 
             </IconButton>

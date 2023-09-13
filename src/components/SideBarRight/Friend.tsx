@@ -7,44 +7,43 @@ import AlarmIcon from '@mui/icons-material/Alarm';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import FriendList from "./FriendList";
-
+import { GlobalStylesContext } from '../../context/globalStyles';
+import { useContext } from 'react';
 
 
 
 function Friend() {
+    const { primary } = useContext(GlobalStylesContext)!;
+    const { secondary } = useContext(GlobalStylesContext)!;
     return (
-        <Box sx={{
+        <Box style={{backgroundColor: secondary}} sx={{
             width: 384,
-            height: 400,
-            backgroundColor: 'white',
+            maxHeight: 400,
             boxShadow: '0px 0px 8px 4px #0000006c',
             overflow: 'hidden'
 
         }}>
-            <Box sx={{ flexGrow: 1, }}>
+            <Box sx={{ flexGrow: 1}}>
                 <AppBar position="static">
-                    <Toolbar sx={{
+                    <Toolbar style={{backgroundColor: secondary}} sx={{
                         backgroundColor: 'white',
 
                     }}>
-                        <Typography component="div" sx={{
+                        <Typography style={{ color: primary }} component="div" sx={{
                             flexGrow: 1,
                             fontSize: '14px',
-                            color: '#262626'
                         }}>
                             Friends
                         </Typography>
 
                         <div className='buttons'>
-                            <IconButton color="secondary" aria-label="add an alarm" sx={{
-                                color: '#0050B3',
+                            <IconButton style={{ color: primary }} sx={{
                                 fontSize: '14px'
                             }}>
                                 <AlarmIcon />Archive
                             </IconButton>
-                            <Button color="inherit" sx={{
+                            <Button style={{ color: primary }} sx={{
                                 textTransform: 'none',
-                                color: '#0050B3',
                             }} >Settings</Button>
                         </div>
                     </Toolbar>
