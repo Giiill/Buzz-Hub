@@ -6,39 +6,37 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import { UserContext } from '../../context/userContext';
-import { GlobalStylesContext } from '../../context/globalStyles';
 import { useContext } from 'react';
-
+import { useTheme } from '@mui/material';
 
 
 function FriendList() {
     const { data, isLoading } = useContext(UserContext);
-    const { primary } = useContext(GlobalStylesContext)!;
-    const { secondary } = useContext(GlobalStylesContext)!;
+    const theme = useTheme();
     if (isLoading) {
         return (
-            <Box style={{backgroundColor: secondary}} sx={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+            <Box sx={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
                 <CircularProgress />
             </Box>
         );
     };
-
     return (
         <div>{
             // добавляем проверку на существование data и на data.results и указываем что ожидаем от item тип данных string
             data && data.results && data.results.map((item: { name: string }) => {
                 return <div>
-                    <ListItem style={{ backgroundColor: secondary }} alignItems="flex-start" sx={{
+                    <ListItem  alignItems="flex-start" sx={{
+                        backgroundColor: theme.palette.secondary.main,
                         cursor: 'pointer',
                         '&:hover': {
-                            backgroundColor: 'rgba(208, 212, 218, 0.541) !important', // !important выставляет наивысший приоритет
+                            backgroundColor: 'rgba(208, 212, 218, 0.541) ',
 
                         },
                     }}>
                         <ListItemAvatar>
                             <Avatar alt={item.name} src="/static/images/avatar/1.jpg" />
                         </ListItemAvatar>
-                        <ItemName style={{ color: primary }}>{item.name}</ItemName>
+                        <ItemName style={{ color: theme.palette.primary.main }} >{item.name}</ItemName>
                     </ListItem>
                     <Divider variant="inset" component="li" />
                 </div>

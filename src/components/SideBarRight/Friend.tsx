@@ -7,44 +7,37 @@ import AlarmIcon from '@mui/icons-material/Alarm';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import FriendList from "./FriendList";
-import { GlobalStylesContext } from '../../context/globalStyles';
-import { useContext } from 'react';
-
-
+import { useTheme } from '@mui/material';
 
 function Friend() {
-    const { primary } = useContext(GlobalStylesContext)!;
-    const { secondary } = useContext(GlobalStylesContext)!;
+    const theme = useTheme();
     return (
-        <Box style={{backgroundColor: secondary}} sx={{
+        <Box sx={{
             width: 384,
             maxHeight: 400,
             boxShadow: '0px 0px 8px 4px #0000006c',
             overflow: 'hidden'
-
         }}>
-            <Box sx={{ flexGrow: 1}}>
+            <Box sx={{ flexGrow: 1 }}>
                 <AppBar position="static">
-                    <Toolbar style={{backgroundColor: secondary}} sx={{
-                        backgroundColor: 'white',
-
-                    }}>
-                        <Typography style={{ color: primary }} component="div" sx={{
-                            flexGrow: 1,
-                            fontSize: '14px',
-                        }}>
+                    <Toolbar style={{ backgroundColor: theme.palette.secondary.main }} >
+                        <Typography component="div"
+                            style={{ color: theme.palette.primary.main }} sx={{
+                                flexGrow: 1,
+                            }}>
                             Friends
                         </Typography>
 
                         <div className='buttons'>
-                            <IconButton style={{ color: primary }} sx={{
+                            <IconButton sx={{
                                 fontSize: '14px'
                             }}>
-                                <AlarmIcon />Archive
+                                <AlarmIcon style={{ color: theme.palette.primary.main }} />
+                                <Typography style={{ color: theme.palette.primary.main }}>Archive</Typography>
                             </IconButton>
-                            <Button style={{ color: primary }} sx={{
+                            <Button style={{ color: theme.palette.primary.main }} sx={{
                                 textTransform: 'none',
-                            }} >Settings</Button>
+                            }} ><Typography style={{ color: theme.palette.primary.main }}>Setting</Typography></Button>
                         </div>
                     </Toolbar>
                 </AppBar>

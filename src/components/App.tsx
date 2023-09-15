@@ -1,33 +1,17 @@
-import Bar from "./Bar";
-import SideBarRight from './SideBarRight/SideBarRight';
-import { Container } from "@mui/material";
-import Content from './Content';
-import SideBarLeft from './SideBarLeft';
-import { UserProvider } from "../context/userContext";
-import { GlobalStylesProvider } from "../context/globalStyles";
-
+import { Notfoundpage } from '../pages/Notfoundpage';
+import Homepage from '../pages/Homepage';
+import Chatpage from '../pages/Chatpage';
+import { Routes, Route } from 'react-router-dom'; 
 
 
 function App() {
   return (
     <div>
-      <GlobalStylesProvider>
-        <UserProvider>
-          <Bar />
-          <Container fixed sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: '20px',
-            height: '100vh',
-            gap: '25px',
-          }}>
-            <SideBarLeft />
-            <Content />
-            <SideBarRight />
-          </Container>
-        </UserProvider>
-      </GlobalStylesProvider>
-
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path='/not' element={<Notfoundpage />} />
+        <Route path='/chat' element={<Chatpage />} />
+      </Routes>
     </div>)
 }
 
