@@ -1,11 +1,10 @@
 import { Container } from "@mui/material";
-import SideBarLeft from '../components/SideBarLeft';
-import Content from '../components/Content';
+import SideBarLeft from '../components/Home/SideBarLeft';
+import Content from '../components/Home/Content';
 
 function Home() {
   return (
     <div>
-          
           <Container fixed sx={{
             display: 'flex',
             justifyContent: 'center',
@@ -16,9 +15,6 @@ function Home() {
             <SideBarLeft />
             <Content />
           </Container>
-        
-
-
     </div >)
 }
 

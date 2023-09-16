@@ -5,9 +5,10 @@ import Divider from '@mui/material/Divider';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
-import { UserContext } from '../../context/userContext';
+import { UserContext } from '../../../context/userContext';
 import { useContext } from 'react';
 import { useTheme } from '@mui/material';
+
 
 
 function FriendList() {
@@ -47,8 +48,6 @@ function FriendList() {
 }
 
 export default FriendList;
-
-
 const ItemName = styled('div')(() => ({
     fontSize: '16px',
     lineHeight: '22px',

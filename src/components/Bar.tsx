@@ -21,7 +21,7 @@ function Bar() {
   return (
     <Box> 
       <AppBar position="static" >
-        <Toolbar sx={{ justifyContent: 'flex-end' }} style={{ backgroundColor: theme.palette.primary.main }}>
+        <Toolbar sx={{ justifyContent: 'flex-end', backgroundColor: theme.palette.primary.main }}>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -85,7 +85,6 @@ const Search = styled('div')(({ theme }) => ({
   marginLeft: 0,
   width: '100%',
   [theme.breakpoints.up('sm')]: {
-
     width: 'auto',
   },
 }));
