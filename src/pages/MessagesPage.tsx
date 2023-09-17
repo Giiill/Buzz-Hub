@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import SideBarLeft from '../components/Home/SideBarLeft';
-import Content from '../components/Home/Content';
+import Chat from '../components/Messages/Chat';
 
 function Home() {
   return (
@@ -13,7 +13,7 @@ function Home() {
             gap: '25px',
           }}>
             <SideBarLeft />
-            <Content />
+            <Chat />
           </Container>
     </div >)
 }

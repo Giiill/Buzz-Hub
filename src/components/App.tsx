@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
-import Notfoundpage from '../pages/Notfoundpage';
-import Homepage from '../pages/Homepage';
-import Chatpage from '../pages/Chatpage';
+import Notfoundpage from '../pages/NotFoundPage';
+import Homepage from '../pages/HomePage';
+import Chatpage from '../pages/MessagesPage';
 import Layout from './Layout';
 
 function App() {
