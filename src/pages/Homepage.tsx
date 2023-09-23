@@ -1,27 +1,25 @@
-import { Container } from "@mui/material";
-import SideBarLeft from '../components/Home/SideBarLeft';
-import Content from '../components/Home/Content';
-import SideBarRight from '../components/Home/SideBarRight/SideBarRight';
+import { Container, styled } from "@mui/material";
+import { SideBarLeft } from '../components/Home/SideBarLeft';
+import { Content } from '../components/Home/Content';
+import { SideBarRight } from '../components/Home/SideBarRight/SideBarRight';
 
-function Home() {
+function HomePage() {
   return (
-    <>
-      <Container fixed sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: '20px',
-        height: '100vh',
-        gap: '25px',
-      }}>
-        <SideBarLeft />
-        <Content />
-        <SideBarRight />
-      </Container>
-    </>)
+    <StyledContainer fixed>
+      <SideBarLeft />
+      <Content />
+      <SideBarRight />
+    </StyledContainer>
+  )
 }
 
-export default Home;
+export { HomePage };
 
-
-
+const StyledContainer = styled(Container)(() => ({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '20px',
+  height: '100vh',
+  gap: '25px',
+}));
 

@@ -1,21 +1,25 @@
-import { Container } from "@mui/material";
-import SideBarLeft from '../components/Home/SideBarLeft';
-import Chat from '../components/Messages/Chat';
+import { Container, styled } from "@mui/material";
+import { SideBarLeft } from '../components/Home/SideBarLeft';
+import { Chat } from '../components/Messages/Chat';
+import { ChatProvider } from "../context/chatContext";
 
-function Home() {
+function MessagesPage() {
   return (
-    <div>
-          <Container fixed sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: '20px',
-            height: '100vh',
-            gap: '25px',
-          }}>
-            <SideBarLeft />
-            <Chat />
-          </Container>
-    </div >)
+
+    <ChatProvider>
+      <StyledContainer fixed >
+        <SideBarLeft />
+        <Chat />
+      </StyledContainer>
+    </ChatProvider>)
 }
 
-export default Home;
+export { MessagesPage };
+
+const StyledContainer = styled(Container)(() => ({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '20px',
+  gap: '25px',
+
+}));

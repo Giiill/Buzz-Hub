@@ -1,24 +1,21 @@
 import Box from '@mui/material/Box';
-import { Link  } from 'react-router-dom';
-import { useTheme } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { styled } from '@mui/material';
 
-function BoxSx() {
-  const theme = useTheme();
+function SideBarLeft() {
   return (
-    <Box
-      sx={{
-        minWidth: 192,
-        height: 498,
-        backgroundColor: theme.palette.primary.main,
-        boxShadow: '0px 0px 8px 4px #0000006c',
-      }}
-      
-    >
+    <MainBox>
       <Link to="/chat">chat</Link>
       <br></br>
       <Link to="/">home</Link>
-      
-    </Box>
+    </MainBox>
   );
 }
-export default BoxSx;
+export { SideBarLeft };
+
+const MainBox = styled(Box)(({ theme }) => ({
+  minWidth: 192,
+  height: 498,
+  backgroundColor: theme.palette.primary.main,
+  boxShadow: '0px 0px 8px 4px #0000006c',
+}))

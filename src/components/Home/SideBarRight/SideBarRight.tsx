@@ -1,10 +1,10 @@
-import Friend from "./Friend";
+import { Friend } from "./Friend";
 
-function SideBar() {
+function SideBarRight() {
     return (
         <Friend />
 
     );
 };
-export default SideBar;
+export { SideBarRight };
 

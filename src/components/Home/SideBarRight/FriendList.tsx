@@ -1,55 +1,74 @@
 import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import styled from "@emotion/styled";
+import { styled } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
-import { UserContext } from '../../../context/userContext';
-import { useContext } from 'react';
-import { useTheme } from '@mui/material';
+import { useUserState } from '../../../hooks/useUserState';
+
 
 
 
 function FriendList() {
-    const { data, isLoading } = useContext(UserContext);
-    const theme = useTheme();
+    const { data, isLoading } = useUserState();
+    const validResults = data && data.results; // проверку на существование данных
     if (isLoading) {
         return (
-            <Box sx={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                <CircularProgress />
-            </Box>
+            <BoxLoading>
+                <LoadingIcon />
+            </BoxLoading>
         );
     };
     return (
-        <div>{
-            // добавляем проверку на существование data и на data.results и указываем что ожидаем от item тип данных string
-            data && data.results && data.results.map((item: { name: string }) => {
-                return <div>
-                    <ListItem  alignItems="flex-start" sx={{
-                        backgroundColor: theme.palette.secondary.main,
-                        cursor: 'pointer',
-                        '&:hover': {
-                            backgroundColor: 'rgba(208, 212, 218, 0.541) ',
-
-                        },
-                    }}>
-                        <ListItemAvatar>
-                            <Avatar alt={item.name} src="/static/images/avatar/1.jpg" />
-                        </ListItemAvatar>
-                        <ItemName style={{ color: theme.palette.primary.main }} >{item.name}</ItemName>
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
-                </div>
+        <>{
+            // указываем что ожидаем от item тип данных string
+            validResults.map((item: { name: string }) => {
+                return (
+                    <>
+                        <FriendItem>
+                            <FriendAvatar alt={item.name} src="/static/images/avatar/1.jpg" />
+                            <FriendName>{item.name}</FriendName>
+                        </FriendItem>
+                        <Divider variant="inset" component="li" />
+                    </>
+                )
             })
-        }</div>
+        }</>
     );
+};
 
-}
+export { FriendList };
 
-export default FriendList;
-const ItemName = styled('div')(() => ({
+const BoxLoading = styled(Box)(() => ({
+    display: 'flex',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
+}));
+
+const LoadingIcon = styled(CircularProgress)(({ theme }) => ({
+    color: theme.palette.primary.main,
+}));
+
+const FriendItem = styled(ListItem)(({ theme }) => ({
+    alignItems: "flex-start",
+    cursor: 'pointer',
+    backgroundColor: theme.palette.secondary.main,
+    '&:hover': {
+        backgroundColor: theme.palette.success.main,
+
+    },
+}));
+
+const FriendAvatar = styled(Avatar)(() => ({
+    bordeRadius: "50%",
+    boxShadow: "0px 0px 8px 3px #0000006c",
+}));
+
+
+const FriendName = styled('div')(() => ({
     fontSize: '16px',
     lineHeight: '22px',
-    fontWeight: 600,
-}))
+    fontWeight: 'bold',
+    marginLeft: '20px',
+}));

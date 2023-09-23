@@ -1,87 +1,63 @@
-import { styled } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import { Typography } from '@mui/material';
+import { Avatar, Toolbar, Typography, styled } from '@mui/material';
 import IconButton from '@mui/material/IconButton/IconButton';
 import Badge from '@mui/material/Badge/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { UserContext } from '../context/userContext';
-import { useContext } from 'react';
-import { useTheme } from '@mui/material/styles';
-
+import { useUserState } from '../hooks/useUserState';
 function Bar() {
-  const { data } = useContext(UserContext);
-  const theme = useTheme();
+  const { userName } = useUserState();
+  {/* условия на существования data, data.results, data.results[0]*/}
   return (
-    <Box> 
-      <AppBar position="static" >
-        <Toolbar sx={{ justifyContent: 'flex-end', backgroundColor: theme.palette.primary.main }}>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton
-              size="large"
-              edge="end"
-              color="inherit"
-            >
-              <AccountCircle />
+    <MainBox >
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Search…"
+          inputProps={{ 'aria-label': 'search' }}
+        />
+      </Search>
+      <SeparatorBox />
+      <UserNavigationBox sx={{ display: { xs: 'none', md: 'flex' } }}>
+        <UserIconButton >
+          <UserIconAccount alt="Luke" src="/static/images/avatar/1.jpg" />
+          <UserNameAccount>
+            {userName} 
+          </UserNameAccount>
+        </UserIconButton>
+        <MessageIconButton>
+          <Badge badgeContent={3} color="error">
+            <MailIcon />
+          </Badge>
+        </MessageIconButton>
+        <NotificationIconButton>
+          <Badge badgeContent={2} color="error">
+            <NotificationsIcon />
+          </Badge>
+        </NotificationIconButton>
+      </UserNavigationBox>
+      <Burger sx={{ display: { xs: 'flex', md: 'none' } }}>
+        <BurgerIconButton>
+          <MoreIcon />
+        </BurgerIconButton>
+      </Burger>
+    </MainBox>
 
-              <Typography sx={{
-                paddingLeft: 1  
-              }}>{data && data.results && data.results[0] ? data.results[0].name : 'downloading'}</Typography> {/* условия на существования data, data.results, data.results[0]*/} 
-            </IconButton>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={3} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={2} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Box>
+
   )
-}
-export default Bar;
+};
+
+export { Bar };
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: 'white',
-  '&:hover': {
-    backgroundColor: 'white',
-  },
+  backgroundColor: theme.palette.secondary.main,
   marginLeft: 0,
   width: '100%',
   [theme.breakpoints.up('sm')]: {
@@ -97,11 +73,10 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: 'silver',
+  color: theme.palette.success.main,
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'BFBFBF',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -117,8 +92,63 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const MainBox = styled(Toolbar)(({ theme }) => ({
+  justifyContent: 'flex-end',
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.secondary.main,
+  boxShadow: '0px 0px 8px 4px #0000006c'
+}));
 
+const UserIconButton = styled(Box)(() => ({
+  height: '50px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '10px',
+  paddingLeft: '10px',
+  paddingRight: '10px',
+  marginRight: '10px',
+  '&:hover': {
+    cursor: 'pointer',
+    boxShadow: "0px 0px 8px 3px #0000006c",
+  },
+  '&:active': {
+    transform: 'scale(0.95)',
+  }
+}));
 
+const UserIconAccount = styled(Avatar)(() => ({
+  boxShadow: "0px 0px 8px 3px #0000006c",
+  marginRight: '10px'
+}));
 
+const UserNameAccount = styled(Typography)(({ theme }) => ({
+  color: theme.palette.secondary.main,
+}));
 
+const MessageIconButton = styled(IconButton)(({ theme }) => ({
+  color: theme.palette.secondary.main,
+  marginRight: '10px'
+}));
 
+const NotificationIconButton = styled(IconButton)(({ theme }) => ({
+  color: theme.palette.secondary.main,
+  marginRight: '10px'
+
+}));
+
+const Burger = styled(Box)(() => ({
+
+}));
+
+const BurgerIconButton = styled(IconButton)(({ theme }) => ({
+  color: theme.palette.secondary.main
+}))
+
+const UserNavigationBox = styled(Box)(() => ({
+
+}));
+
+const SeparatorBox = styled(Box)(() => ({
+  flexGrow: 1
+}));

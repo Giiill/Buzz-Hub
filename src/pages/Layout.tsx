@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Bar from './Bar';
+import { Bar } from '../components/Bar';
 import { UserProvider } from '../context/userContext';
 import { ThemeProvider, createTheme } from '@mui/material';
 
@@ -16,9 +16,9 @@ const Layout = () => {
         </>
 
     )
-}
+};
 
-export default Layout;
+export { Layout };
 
 
 const theme = createTheme({
@@ -28,6 +28,9 @@ const theme = createTheme({
         },
         secondary: {
             main: '#FFFFFF',
+        },
+        success: {
+            main: '#e3e1e1',
         },
     },
 });
