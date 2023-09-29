@@ -1,10 +1,11 @@
-import { createContext, PropsWithChildren, Provider, useContext, useState } from "react";
+import { createContext, PropsWithChildren, useContext, useState } from "react";
 import { useUserState } from "../hooks/useUserState";
 type Messages = {
-    id: Number,
+    id: number,
     message: string,
     userName: string,
-    isEdit: Boolean
+    postDate: string,
+    isEdit: boolean
 };
 
 type ChatContexType = {
@@ -31,12 +32,14 @@ const ChatProvider = ({ children }: PropsWithChildren) => {
             id: 1,
             message: 'Hello',
             userName: 'Niki',
+            postDate: new Date().toLocaleString(),
             isEdit: false
         },
         {
             id: 2,
             message: 'Hi',
             userName: 'Alex',
+            postDate: new Date().toLocaleString(),
             isEdit: false
         },
 
@@ -51,12 +54,14 @@ const ChatProvider = ({ children }: PropsWithChildren) => {
             id: 3,
             message: value,
             userName: userName,
+            postDate: new Date().toLocaleString(),
             isEdit: false,
         }
         // при помощи деструктуризации создается новый массив
         // включая все данные из предыдущего массива, но при этом
         // в новый массив в конец добавляется еще newMessage
         setMessages([...messages, newMessage]);
+        setInputState('');
     }
 
     return (
@@ -64,7 +69,6 @@ const ChatProvider = ({ children }: PropsWithChildren) => {
             {children}
         </ChatContext.Provider>
     )
-
 };
 
 

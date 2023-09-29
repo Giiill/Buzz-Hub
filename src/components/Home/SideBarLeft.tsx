@@ -5,7 +5,7 @@ import { styled } from '@mui/material';
 function SideBarLeft() {
   return (
     <MainBox>
-      <Link to="/chat">chat</Link>
+      <Link to="/messages">messages</Link>
       <br></br>
       <Link to="/">home</Link>
     </MainBox>

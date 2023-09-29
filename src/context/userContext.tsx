@@ -8,7 +8,7 @@ type IUserContext = {
 }
 
 // создаем конекст с типами данных из типа, и сразу же тут создаем значения по умолчанию
-const UserContext = createContext<IUserContext>({ data: {}, isLoading: true, userName: 'downloading' });
+const UserContext = createContext<IUserContext>({ data: {}, isLoading: true, userName: '' });
 
 const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [data, setData] = useState();

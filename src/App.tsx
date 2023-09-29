@@ -1,22 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from './pages/Layout';
-import { routes as customRoutes } from './types/RouteTypes';
+import { routes } from './types/Routes';
 
 
 
 
 function App() {
   return (
-    <>
-    <Routes>
+   <Routes>
         <Route path='/' element={<Layout />}>
-          {/* Импортируем пользовательские маршруты из другого файла */}
-          {customRoutes}
+          {routes.map((route, index) => (
+            <Route key={index} {...route} />
+          ))}
         </Route>
       </Routes>
-    </>
-
-    )
+  )
 }
 
 export { App };
