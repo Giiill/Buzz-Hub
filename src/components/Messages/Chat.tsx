@@ -4,6 +4,7 @@ import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import Button from '@mui/material/Button';
 import AttachEmailIcon from '@mui/icons-material/AttachEmail';
 import Avatar from "@mui/material/Avatar";
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { Typography, styled } from '@mui/material';
 import { useMassagesState } from '../../context/chatContext';
 import { useRef } from 'react';
@@ -35,6 +36,16 @@ function Chat() {
   // ----------------------------------
   return (
     <MainBox>
+      <HeadersChat>
+        <ButtonBack startIcon={<KeyboardArrowLeftIcon />}>
+          Back
+        </ButtonBack>
+        < NameAndParticipantUsers>
+          <NameChat>Jedi chat</NameChat>
+          <ChatParticipants>3 humans</ChatParticipants>
+        </NameAndParticipantUsers>
+        <AvatarChat alt="Img-Dialog" src="/static/images/avatar/1.jpg" />
+      </HeadersChat>
       <BoxMessages ref={BoxMessagesRef}>
         {messages.map(message => {
           return (
@@ -75,7 +86,7 @@ export { Chat };
 
 const MainBox = styled(Box)(({ theme }) => ({
   width: '100%',
-  height: '500px',
+  height: '700px',
   backgroundColor: theme.palette.secondary.main,
   boxShadow: '0px 0px 8px 4px #0000006c',
   display: 'flex',
@@ -83,10 +94,56 @@ const MainBox = styled(Box)(({ theme }) => ({
 
 }));
 
+const HeadersChat = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+  height: '80px',
+  boxShadow: '0px 0px 8px 4px #0000006c',
+  zIndex: 1,
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  paddingRight: '10px',
+  paddingLeft: '10px'
+  
+}));
+
+const ButtonBack = styled(Button)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  display: 'flex',
+  textTransform: 'none',
+  fontSize: '14px'
+}));
+
+const NameAndParticipantUsers = styled(Box)(() => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+}))
+
+const AvatarChat = styled(Avatar)(({ theme }) => ({
+  boxShadow: '0px 0px 8px 4px #0000006c',
+  height: '50px',
+  width: '50px'
+}));
+
+const NameChat = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  fontSize: '18px',
+  textShadow: '4px 4px 4px rgba(0, 0, 0, 0.5)',
+  fontWeight: 'bold'
+}));
+
+const ChatParticipants = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  fontSize: '14px',
+}));
+
 const BoxMessages = styled(Box)(() => ({
   width: '100%',
   height: '100%',
   overflowY: "auto",
+  paddingTop: '20px',
+  paddingBottom: '20px'
 }));
 
 const Message = styled(Box)(({ theme }) => ({
@@ -95,7 +152,6 @@ const Message = styled(Box)(({ theme }) => ({
   paddingLeft: '10px',
   backgroundColor: theme.palette.secondary.main,
   marginBottom: '10px',
-
 }));
 
 const UserAvatart = styled(Avatar)(() => ({
@@ -131,9 +187,9 @@ const EnteringMessage = styled(Box)(({ theme }) => ({
   display: 'flex',
   gap: '10px',
   alignItems: 'center',
-  marginBottom: '5px',
   backgroundColor: theme.palette.secondary.main,
-
+  boxShadow: '0px 0px 8px 4px #0000006c',
+  zIndex: 1
 }));
 
 const AttatchFile = styled(Button)(({ theme }) => ({
