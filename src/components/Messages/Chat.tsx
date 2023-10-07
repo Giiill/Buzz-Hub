@@ -5,6 +5,8 @@ import Button from '@mui/material/Button';
 import AttachEmailIcon from '@mui/icons-material/AttachEmail';
 import Avatar from "@mui/material/Avatar";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import IconButton from '@mui/material/IconButton/IconButton';
+import MoreIcon from '@mui/icons-material/MoreVert';
 import { Typography, styled } from '@mui/material';
 import { useMassagesState } from '../../context/chatContext';
 import { useRef } from 'react';
@@ -40,11 +42,18 @@ function Chat() {
         <ButtonBack startIcon={<KeyboardArrowLeftIcon />}>
           Back
         </ButtonBack>
-        < NameAndParticipantUsers>
+        < ChatInfo>
           <NameChat>Jedi chat</NameChat>
-          <ChatParticipants>3 humans</ChatParticipants>
-        </NameAndParticipantUsers>
-        <AvatarChat alt="Img-Dialog" src="/static/images/avatar/1.jpg" />
+          <ChatParticipants>3 users</ChatParticipants>
+        </ChatInfo>
+        <AvatartAndBurger>
+          <AvatarChat alt='' src="" />
+          <Burger>
+            <BurgerIconButton>
+              <MoreIcon />
+            </BurgerIconButton>
+          </Burger>
+        </AvatartAndBurger>
       </HeadersChat>
       <BoxMessages ref={BoxMessagesRef}>
         {messages.map(message => {
@@ -86,7 +95,7 @@ export { Chat };
 
 const MainBox = styled(Box)(({ theme }) => ({
   width: '100%',
-  height: '700px',
+  height: '500px',
   backgroundColor: theme.palette.secondary.main,
   boxShadow: '0px 0px 8px 4px #0000006c',
   display: 'flex',
@@ -104,7 +113,7 @@ const HeadersChat = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   paddingRight: '10px',
   paddingLeft: '10px'
-  
+
 }));
 
 const ButtonBack = styled(Button)(({ theme }) => ({
@@ -114,17 +123,32 @@ const ButtonBack = styled(Button)(({ theme }) => ({
   fontSize: '14px'
 }));
 
-const NameAndParticipantUsers = styled(Box)(() => ({
+const ChatInfo = styled(Box)(() => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-}))
+}));
+
+const AvatartAndBurger = styled(Box)(() => ({
+  display: 'flex',
+  gap: 30,
+  alignItems: 'center'
+}));
 
 const AvatarChat = styled(Avatar)(({ theme }) => ({
   boxShadow: '0px 0px 8px 4px #0000006c',
   height: '50px',
   width: '50px'
 }));
+
+const Burger = styled(Box)(() => ({
+
+}));
+
+const BurgerIconButton = styled(IconButton)(({ theme }) => ({
+  color: theme.palette.primary.main
+}))
+
 
 const NameChat = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
