@@ -31,7 +31,7 @@ const ChatProvider = ({ children }: PropsWithChildren) => {
     const [inputState, setInputState] = useState('');
     const [messages, setMessages] = useState([
         {
-            id: 1,
+            id: 0,
             message: 'Hello',
             avatar: imgConfig['Darth Vader'],
             userName: 'Darth Vader',
@@ -39,7 +39,7 @@ const ChatProvider = ({ children }: PropsWithChildren) => {
             isEdit: false
         },
         {
-            id: 2,
+            id: 1,
             message: 'Hi',
             avatar: imgConfig['Luke Skywalker'],
             userName: 'Luke Skywalker',
@@ -53,8 +53,9 @@ const ChatProvider = ({ children }: PropsWithChildren) => {
     };
 
     const sendMessage = (value: string) => {
+        const maxId = Math.max(...messages.map((message) => message.id), 0);
         const newMessage = {
-            id: 3,
+            id: maxId + 1,
             message: value,
             avatar: imgConfig['Babi Yoda'],
             userName: userName,
