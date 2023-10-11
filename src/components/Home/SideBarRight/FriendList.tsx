@@ -11,7 +11,7 @@ import { useUserState } from '../../../hooks/useUserState';
 
 function FriendList() {
     const { data, isLoading } = useUserState();
-    const validResults = data && data.results; // проверку на существование данных
+    const validResults = data && data.results  || []; // проверку на существование данных
     if (isLoading) {
         return (
             <BoxLoading>

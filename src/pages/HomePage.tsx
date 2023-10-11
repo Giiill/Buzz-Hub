@@ -19,7 +19,6 @@ const StyledContainer = styled(Container)(() => ({
   display: 'flex',
   justifyContent: 'center',
   marginTop: '20px',
-  height: '100vh',
   gap: '25px',
 }));
 
