@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import { useUserState } from '../../../hooks/useUserState';
-
+import { imgConfig } from '../../../assets/imgConfig';
 
 
 
@@ -26,7 +26,7 @@ function FriendList() {
                 return (
                     <>
                         <FriendItem>
-                            <FriendAvatar alt={item.name} src="/static/images/avatar/1.jpg" />
+                            <FriendAvatar alt={item.name} src={imgConfig[item.name]} />
                             <FriendName>{item.name}</FriendName>
                         </FriendItem>
                         <Divider variant="inset" component="li" />
@@ -61,6 +61,8 @@ const FriendItem = styled(ListItem)(({ theme }) => ({
 }));
 
 const FriendAvatar = styled(Avatar)(() => ({
+    height: '50px',
+    width: '50px',
     bordeRadius: "50%",
     boxShadow: "0px 0px 8px 3px #0000006c",
 }));

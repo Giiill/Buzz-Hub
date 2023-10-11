@@ -1,8 +1,10 @@
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
 import { useUserState } from "../hooks/useUserState";
+import { imgConfig } from "../assets/imgConfig";
 type Messages = {
     id: number,
     message: string,
+    avatar: string,
     userName: string,
     postDate: string,
     isEdit: boolean
@@ -25,26 +27,27 @@ const ChatContext = createContext<ChatContexType>({
 
 
 const ChatProvider = ({ children }: PropsWithChildren) => {
+    const {userName} = useUserState();
     const [inputState, setInputState] = useState('');
-
     const [messages, setMessages] = useState([
         {
             id: 1,
             message: 'Hello',
-            userName: 'Niki',
+            avatar: imgConfig['Darth Vader'],
+            userName: 'Darth Vader',
             postDate: new Date().toLocaleString(),
             isEdit: false
         },
         {
             id: 2,
             message: 'Hi',
-            userName: 'Alex',
+            avatar: imgConfig['Luke Skywalker'],
+            userName: 'Luke Skywalker',
             postDate: new Date().toLocaleString(),
             isEdit: false
         },
 
     ]);
-    const { userName } = useUserState();
     const setInputValue = (value: string) => {
         setInputState(value);
     };
@@ -53,6 +56,7 @@ const ChatProvider = ({ children }: PropsWithChildren) => {
         const newMessage = {
             id: 3,
             message: value,
+            avatar: imgConfig['Babi Yoda'],
             userName: userName,
             postDate: new Date().toLocaleString(),
             isEdit: false,
@@ -68,7 +72,7 @@ const ChatProvider = ({ children }: PropsWithChildren) => {
         const messagesString = JSON.stringify(messages);
         localStorage.setItem('messagesData', messagesString);
     };
-     // Функция для чтения сообщений из Local Storage и установки их в состоянии компонента
+    // Функция для чтения сообщений из Local Storage и установки их в состоянии компонента
     const loadMessageFromLocalStorage = () => {
         const messagesDataFromLocalStorage = localStorage.getItem('messagesData');
         if (!!messagesDataFromLocalStorage) {

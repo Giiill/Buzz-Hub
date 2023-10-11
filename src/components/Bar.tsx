@@ -8,9 +8,9 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useUserState } from '../hooks/useUserState';
+import { imgConfig } from '../assets/imgConfig';
 function Bar() {
-  const { userName } = useUserState();
-  {/* условия на существования data, data.results, data.results[0]*/}
+  const {userName} = useUserState();
   return (
     <MainBox >
       <Search>
@@ -25,9 +25,9 @@ function Bar() {
       <SeparatorBox />
       <UserNavigationBox sx={{ display: { xs: 'none', md: 'flex' } }}>
         <UserIconButton >
-          <UserIconAccount alt="Luke" src="/static/images/avatar/1.jpg" />
+          <UserIconAccount alt="" src={imgConfig['Babi Yoda']} />
           <UserNameAccount>
-            {userName} 
+            {userName}
           </UserNameAccount>
         </UserIconButton>
         <MessageIconButton>
@@ -118,6 +118,8 @@ const UserIconButton = styled(Box)(() => ({
 }));
 
 const UserIconAccount = styled(Avatar)(() => ({
+  height: '50px',
+  width: '50px',
   boxShadow: "0px 0px 8px 3px #0000006c",
   marginRight: '10px'
 }));

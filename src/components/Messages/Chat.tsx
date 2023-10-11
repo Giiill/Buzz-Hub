@@ -59,7 +59,7 @@ function Chat() {
         {messages.map(message => {
           return (
             <Message>
-              <UserAvatart alt={message.userName} src="/static/images/avatar/1.jpg" />
+              <UserAvatart alt={message.userName} src={message.avatar} />
               <MessageText>
                 <BoxUserNameAndPostDate>
                   <UserName>{message.userName}</UserName>
@@ -179,6 +179,8 @@ const Message = styled(Box)(({ theme }) => ({
 }));
 
 const UserAvatart = styled(Avatar)(() => ({
+  height: '50px',
+  width: '50px',
   bordeRadius: "50%",
   boxShadow: "0px 0px 8px 3px #0000006c",
 }));
