@@ -53,6 +53,7 @@ const LoadingIcon = styled(CircularProgress)(({ theme }) => ({
 const FriendItem = styled(ListItem)(({ theme }) => ({
     alignItems: "flex-start",
     cursor: 'pointer',
+    transition: 'background-color 0.3s',
     backgroundColor: theme.palette.secondary.main,
     '&:hover': {
         backgroundColor: theme.palette.success.main,
