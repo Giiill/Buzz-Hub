@@ -16,7 +16,10 @@ function Chat() {
   const { inputState, setInputValue, messages, sendMessage } = useMassagesState();
 
   // Scroll down after sending a message
+  // ----------------------------------
   const BoxMessagesRef = useRef<HTMLDivElement>(null);
+
+  // Scroll down function after sending a message.
   const scrollToBottom = () => {
     if (BoxMessagesRef.current) {
       BoxMessagesRef.current.scrollTop =
@@ -24,16 +27,20 @@ function Chat() {
     };
   };
 
+  // Key handler called when the "Enter" key is pressed.
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
       handleSendAction(inputState)
     }
   };
+  // Click handler for the submit button.
   const handleKeyClick = (inputState: string) => {
     handleSendAction(inputState)
   };
+  // Function to send a message and scroll down.
   const handleSendAction = (inputState: string) => {
     sendMessage(inputState);
+    // Delay before scrolling down to ensure correct scrolling after adding a message.
     setTimeout(scrollToBottom, 0);
   };
   // ----------------------------------

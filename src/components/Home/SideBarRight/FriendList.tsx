@@ -11,7 +11,7 @@ import { imgConfig } from '../../../assets/imgConfig';
 
 function FriendList() {
     const { data, isLoading } = useUserState();
-    const validResults = data && data.results  || []; // проверку на существование данных
+    const validResults = data && data.results  || []; // Checking the existence of data
     if (isLoading) {
         return (
             <BoxLoading>
@@ -21,7 +21,6 @@ function FriendList() {
     };
     return (
         <>{
-            // указываем что ожидаем от item тип данных string
             validResults.map((item: { name: string }) => {
                 return (
                     <>

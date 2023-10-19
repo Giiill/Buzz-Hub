@@ -18,4 +18,6 @@ const MainBox = styled(Box)(({ theme }) => ({
   height: 498,
   backgroundColor: theme.palette.primary.main,
   boxShadow: '0px 0px 8px 4px #0000006c',
+  fontWeight: 'bold',
+  fontSize: '30px',
 }))

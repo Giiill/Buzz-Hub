@@ -15,7 +15,7 @@ type ChatContexType = {
     messages: Messages[],
     setInputValue: (value: string) => void,
     sendMessage: (value: string) => void,
-}
+};
 
 const ChatContext = createContext<ChatContexType>({
     inputState: '',
@@ -53,6 +53,7 @@ const ChatProvider = ({ children }: PropsWithChildren) => {
     };
 
     const sendMessage = (value: string) => {
+        // Find the maximum message ID in existing messages.
         const maxId = Math.max(...messages.map((message) => message.id), 0);
         const newMessage = {
             id: maxId + 1,
@@ -62,18 +63,19 @@ const ChatProvider = ({ children }: PropsWithChildren) => {
             postDate: new Date().toLocaleString(),
             isEdit: false,
         }
-        // при помощи деструктуризации создается новый массив
-        // включая все данные из предыдущего массива, но при этом
-        // в новый массив в конец добавляется еще newMessage
+       // Add a new message to the list of messages, create a new array.
         setMessages([...messages, newMessage]);
         setInputState('');
     };
-    // Функция сохранения сообщений в Local Storage
+
+    // ======================================================================
+    // Function of saving messages in Local Storage
     const saveMessagesToLocalStorage = (messages: object) => {
         const messagesString = JSON.stringify(messages);
         localStorage.setItem('messagesData', messagesString);
     };
-    // Функция для чтения сообщений из Local Storage и установки их в состоянии компонента
+
+    // Function to read messages from Local Storage and set them to component state
     const loadMessageFromLocalStorage = () => {
         const messagesDataFromLocalStorage = localStorage.getItem('messagesData');
         if (!!messagesDataFromLocalStorage) {
@@ -85,14 +87,15 @@ const ChatProvider = ({ children }: PropsWithChildren) => {
             };
         };
     };
-    // Эффект для загрузки сообщений из Local Storage при монтировании
+    // Effect to load messages from Localstorage on mount
     useEffect(() => {
         loadMessageFromLocalStorage();
     }, []);
-    // Эффект для сохранения сообщений в Local Storage при изменении состояния messages
+    // Effect for saving messages in Localstorage when messages state changes
     useEffect(() => {
         saveMessagesToLocalStorage(messages);
     }, [messages]);
+    // ======================================================================
 
     return (
         <ChatContext.Provider value={{ inputState, messages, setInputValue, sendMessage, }}>

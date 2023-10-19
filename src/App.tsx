@@ -1,20 +1,10 @@
-import { Routes, Route } from 'react-router-dom';
-import { Layout } from './pages/Layout';
-import { routes } from './types/Routes';
+import { routeConfig } from './types/Routes';
 import { ThemeProvider, createTheme } from '@mui/material';
-
-
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path='/' element={<Layout />}>
-            {routes.map((route, index) => (
-              <Route key={index} {...route} />
-            ))}
-          </Route>
-        </Routes>
+      {routeConfig}
     </ThemeProvider>
   );
 };

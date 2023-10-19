@@ -1,16 +1,14 @@
-import { createContext, useState, useEffect } from "react";
-// типс контекста который указывает какой тип данных ожидается в контексте
-type IUserContext = {
+import { createContext, useState, useEffect, PropsWithChildren } from "react";
+
+type UserContextType = {
   data: any,
   isLoading: boolean,
   userName: string,
 };
 
+const UserContext = createContext<UserContextType>({ data: {}, isLoading: true, userName: '' });
 
-// создаем конекст с типами данных из типа, и сразу же тут создаем значения по умолчанию
-const UserContext = createContext<IUserContext>({ data: {}, isLoading: true, userName: '' });
-
-const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [data, setData] = useState();
   const userName = 'Niki';
 

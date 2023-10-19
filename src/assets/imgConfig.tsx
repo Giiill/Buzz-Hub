@@ -10,7 +10,9 @@ import Biggs from '../public/avatar/Biggs Darklighter.jpg';
 import ObiMan from '../public/avatar/Obi-Wan Kenobi.jpg';
 import BabiYoda from '../public/avatar/Babi Yoda.jpg';
 
-const imgConfig: { [key: string]: string } = {
+type imgConfig = Record<string, string>
+
+const imgConfig: imgConfig = {
     "Darth Vader": DarthVader,
     "Luke Skywalker": Luke,
     "C-3PO": CFreePO,

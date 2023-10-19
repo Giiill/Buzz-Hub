@@ -1,6 +1,8 @@
 import { MessagesPage } from "../pages/MessagesPage";
 import { NotFoundPage } from "../pages/NotFoundPage";
-import { HomePage } from "../pages/HomePage"; 
+import { HomePage } from "../pages/HomePage";
+import { Layout } from "../pages/Layout";
+import { Routes, Route } from 'react-router-dom';
 
 type Route = {
     index?: boolean,
@@ -12,8 +14,17 @@ type Routes = Route[];
 
 
 const routes: Routes = [
-    {index: true, element: <HomePage />},
-    {path: '*', element: <NotFoundPage />},
-    {path: 'messages', element: <MessagesPage />}
+    { index: true, element: <HomePage /> },
+    { path: '*', element: <NotFoundPage /> },
+    { path: 'messages', element: <MessagesPage /> }
 ]
-export { routes };
+const routeConfig = (
+    <Routes>
+        <Route path='/' element={<Layout />}>
+            {routes.map((route, index) => (
+                <Route key={index} {...route} />
+            ))}
+        </Route>
+    </Routes>)
+
+export { routeConfig };
