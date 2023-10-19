@@ -1,28 +1,21 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, PropsWithChildren } from "react";
 
-// типс контекста который указывает какой тип данных ожидается в контексте
-type IUserContext = {
+type UserContextType = {
   data: any,
   isLoading: boolean,
-  userName: string
-}
+  userName: string,
+};
 
-// создаем конекст с типами данных из типа, и сразу же тут создаем значения по умолчанию
-const UserContext = createContext<IUserContext>({ data: {}, isLoading: true, userName: '' });
+const UserContext = createContext<UserContextType>({ data: {}, isLoading: true, userName: '' });
 
-const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [data, setData] = useState();
-  const [userName, setUserName] = useState('downloading');
+  const userName = 'Niki';
 
   useEffect(() => {
     fetch('https://swapi.dev/api/people')
       .then(res => res.json())
-      .then(data => {
-        setData(data)
-        if (data && data.results && data.results.length > 0) {
-          setUserName(data.results[0].name);
-        }
-      })
+      .then(data => { setData(data) })
   }, []);
 
 
@@ -31,9 +24,7 @@ const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
       {children}
     </UserContext.Provider>
   )
-
-
-}
+};
 
 export {
   UserProvider,

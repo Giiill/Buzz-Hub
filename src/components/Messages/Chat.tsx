@@ -7,6 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import IconButton from '@mui/material/IconButton/IconButton';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import AddReactionIcon from '@mui/icons-material/AddReaction';
 import { Typography, styled } from '@mui/material';
 import { useMassagesState } from '../../context/chatContext';
 import { useRef } from 'react';
@@ -15,7 +16,10 @@ function Chat() {
   const { inputState, setInputValue, messages, sendMessage } = useMassagesState();
 
   // Scroll down after sending a message
+  // ----------------------------------
   const BoxMessagesRef = useRef<HTMLDivElement>(null);
+
+  // Scroll down function after sending a message.
   const scrollToBottom = () => {
     if (BoxMessagesRef.current) {
       BoxMessagesRef.current.scrollTop =
@@ -23,16 +27,20 @@ function Chat() {
     };
   };
 
+  // Key handler called when the "Enter" key is pressed.
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
       handleSendAction(inputState)
     }
   };
+  // Click handler for the submit button.
   const handleKeyClick = (inputState: string) => {
     handleSendAction(inputState)
   };
+  // Function to send a message and scroll down.
   const handleSendAction = (inputState: string) => {
     sendMessage(inputState);
+    // Delay before scrolling down to ensure correct scrolling after adding a message.
     setTimeout(scrollToBottom, 0);
   };
   // ----------------------------------
@@ -59,7 +67,7 @@ function Chat() {
         {messages.map(message => {
           return (
             <Message>
-              <UserAvatart alt={message.userName} src="/static/images/avatar/1.jpg" />
+              <UserAvatart alt={message.userName} src={message.avatar} />
               <MessageText>
                 <BoxUserNameAndPostDate>
                   <UserName>{message.userName}</UserName>
@@ -72,10 +80,14 @@ function Chat() {
         })}
       </BoxMessages>
       <EnteringMessage>
+        <AddReaction>
+          <ReactionIcon />
+        </AddReaction>
         <AttatchFile>
           <AttachFileIcon />
         </AttatchFile>
         <MessageInputField
+          placeholder='Write a message...'
           onKeyDown={handleKeyPress}
           value={inputState}
           onChange={(e) =>
@@ -100,7 +112,6 @@ const MainBox = styled(Box)(({ theme }) => ({
   boxShadow: '0px 0px 8px 4px #0000006c',
   display: 'flex',
   flexDirection: 'column',
-
 }));
 
 const HeadersChat = styled(Box)(({ theme }) => ({
@@ -166,19 +177,21 @@ const BoxMessages = styled(Box)(() => ({
   width: '100%',
   height: '100%',
   overflowY: "auto",
+  overflowX: 'hidden',
   paddingTop: '20px',
   paddingBottom: '20px'
 }));
 
 const Message = styled(Box)(({ theme }) => ({
   display: 'flex',
-  position: 'relative',
   paddingLeft: '10px',
   backgroundColor: theme.palette.secondary.main,
   marginBottom: '10px',
 }));
 
 const UserAvatart = styled(Avatar)(() => ({
+  height: '50px',
+  width: '50px',
   bordeRadius: "50%",
   boxShadow: "0px 0px 8px 3px #0000006c",
 }));
@@ -194,7 +207,7 @@ const BoxUserNameAndPostDate = styled(Box)(() => ({
 
 const UserName = styled(Typography)(({ theme }) => ({
   fontWeight: "bold",
-  backgroundColor: theme.palette.secondary.main,
+
 
 }));
 
@@ -203,8 +216,7 @@ const PostDate = styled(Typography)(({ theme }) => ({
   fontSize: '11px'
 }));
 
-const TextContent = styled(Typography)(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.main,
+const TextContent = styled(Typography)(() => ({
 }));
 
 const EnteringMessage = styled(Box)(({ theme }) => ({
@@ -216,11 +228,25 @@ const EnteringMessage = styled(Box)(({ theme }) => ({
   zIndex: 1
 }));
 
+const AddReaction = styled(Button)(({ theme }) => ({
+  height: '40px',
+  minWidth: '40px',
+  borderRadius: '50%',  
+  '&:focus': {
+    color: theme.palette.primary.main,
+  }
+}));
+
+const ReactionIcon = styled(AddReactionIcon)(({ theme }) => ({
+  fontSize: '18px',
+  backgroundColor: theme.palette.secondary.main,
+  color: theme.palette.primary.main,
+}));
+
 const AttatchFile = styled(Button)(({ theme }) => ({
   height: '40px',
   minWidth: '40px',
   borderRadius: '50%',
-  marginLeft: '10px',
   '&:focus': {
     color: theme.palette.primary.main,
   }
@@ -234,7 +260,6 @@ const AttachFileIcon = styled(AttachEmailIcon)(({ theme }) => ({
 }));
 
 const MessageInputField = styled(Input)(({ theme }) => ({
-  placeholder: "Write a message",
   width: '100%',
   backgroundColor: theme.palette.secondary.main,
 }));

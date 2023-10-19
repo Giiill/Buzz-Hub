@@ -5,13 +5,13 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import { useUserState } from '../../../hooks/useUserState';
-
+import { imgConfig } from '../../../assets/imgConfig';
 
 
 
 function FriendList() {
     const { data, isLoading } = useUserState();
-    const validResults = data && data.results  || []; // проверку на существование данных
+    const validResults = data && data.results  || []; // Checking the existence of data
     if (isLoading) {
         return (
             <BoxLoading>
@@ -21,12 +21,11 @@ function FriendList() {
     };
     return (
         <>{
-            // указываем что ожидаем от item тип данных string
             validResults.map((item: { name: string }) => {
                 return (
                     <>
                         <FriendItem>
-                            <FriendAvatar alt={item.name} src="/static/images/avatar/1.jpg" />
+                            <FriendAvatar alt={item.name} src={imgConfig[item.name]} />
                             <FriendName>{item.name}</FriendName>
                         </FriendItem>
                         <Divider variant="inset" component="li" />
@@ -53,6 +52,7 @@ const LoadingIcon = styled(CircularProgress)(({ theme }) => ({
 const FriendItem = styled(ListItem)(({ theme }) => ({
     alignItems: "flex-start",
     cursor: 'pointer',
+    transition: 'background-color 0.3s',
     backgroundColor: theme.palette.secondary.main,
     '&:hover': {
         backgroundColor: theme.palette.success.main,
@@ -61,6 +61,8 @@ const FriendItem = styled(ListItem)(({ theme }) => ({
 }));
 
 const FriendAvatar = styled(Avatar)(() => ({
+    height: '50px',
+    width: '50px',
     bordeRadius: "50%",
     boxShadow: "0px 0px 8px 3px #0000006c",
 }));
