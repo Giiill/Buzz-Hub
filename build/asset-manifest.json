@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.js": "/Buzz-Hub/static/js/main.daa76c49.js",
+    "static/media/Owen Lars.jpg": "/Buzz-Hub/static/media/Owen Lars.abbfaf5e2706e4245760.jpg",
+    "static/media/Darth Vader.jpg": "/Buzz-Hub/static/media/Darth Vader.700d97426378fd46bffe.jpg",
+    "static/media/Babi Yoda.jpg": "/Buzz-Hub/static/media/Babi Yoda.2557fa0ea016f6b9c1ee.jpg",
+    "static/media/R2-D2.jpg": "/Buzz-Hub/static/media/R2-D2.2579cacffe710f5381bb.jpg",
+    "static/media/Biggs Darklighter.jpg": "/Buzz-Hub/static/media/Biggs Darklighter.ef405c3739f8c43cd333.jpg",
+    "static/media/Leia Organa.jpg": "/Buzz-Hub/static/media/Leia Organa.53fdeefb54d307ee58c5.jpg",
+    "static/media/Obi-Wan Kenobi.jpg": "/Buzz-Hub/static/media/Obi-Wan Kenobi.54100abaf50f67964994.jpg",
+    "static/media/C-3PO.jpg": "/Buzz-Hub/static/media/C-3PO.d2197acae1f21753dabb.jpg",
+    "static/media/Luke Skywalker.jpg": "/Buzz-Hub/static/media/Luke Skywalker.dc9390280079d805f38d.jpg",
+    "static/media/R5-D4.jpg": "/Buzz-Hub/static/media/R5-D4.965139f9d78558768b8e.jpg",
+    "static/media/Beru Whitesun lars.jpg": "/Buzz-Hub/static/media/Beru Whitesun lars.ae7060bccb1bb807d16d.jpg",
+    "index.html": "/Buzz-Hub/index.html",
+    "main.daa76c49.js.map": "/Buzz-Hub/static/js/main.daa76c49.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.daa76c49.js"
+  ]
+}
