@@ -196,8 +196,9 @@ const UserAvatart = styled(Avatar)(() => ({
   boxShadow: "0px 0px 8px 3px #0000006c",
 }));
 
-const MessageText = styled(Box)(() => ({
-  paddingLeft: '10px'
+const MessageText = styled(Box)(({ theme }) => ({
+  paddingLeft: '10px',
+  color: theme.palette.secondary.contrastText
 }));
 
 const BoxUserNameAndPostDate = styled(Box)(() => ({
@@ -262,11 +263,12 @@ const AttachFileIcon = styled(AttachEmailIcon)(({ theme }) => ({
 const MessageInputField = styled(Input)(({ theme }) => ({
   width: '100%',
   backgroundColor: theme.palette.secondary.main,
+  color: theme.palette.secondary.contrastText
 }));
 
 const ButtonSendMessage = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-  color: theme.palette.secondary.main,
+  color: theme.palette.primary.contrastText,
   height: '25px',
   marginRight: '10px',
   "&:hover": {

@@ -11,9 +11,19 @@ import { useUserState } from '../hooks/useUserState';
 import { imgConfig } from '../assets/imgConfig';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import { useThemeState } from '../hooks/useThemeState';
+import { useEffect, useRef } from 'react';
 
 function Bar() {
   const { userName } = useUserState();
+  const { theme, state, toggleTheme } = useThemeState();
+  const formControlLabelRef = useRef<HTMLDivElement>(null);
+
+
+
+  
+
+
 
   return (
     <MainBox >
@@ -31,6 +41,8 @@ function Bar() {
         <FormControlLabel
           control={<MaterialUISwitch />}
           label=""
+          ref={formControlLabelRef}
+          onClick={() => toggleTheme()}
         />
         <UserIconButton >
           <UserIconAccount alt="" src={imgConfig['Babi Yoda']} />
@@ -56,7 +68,6 @@ function Bar() {
       </Burger>
     </MainBox>
 
-
   )
 };
 
@@ -81,7 +92,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: theme.palette.success.main,
+  color: theme.palette.secondary.contrastText,
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -91,6 +102,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
+    color: theme.palette.secondary.contrastText,
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
       '&:focus': {
@@ -133,16 +145,16 @@ const UserIconAccount = styled(Avatar)(() => ({
 }));
 
 const UserNameAccount = styled(Typography)(({ theme }) => ({
-  color: theme.palette.secondary.main,
+  color: theme.palette.primary.contrastText,
 }));
 
 const MessageIconButton = styled(IconButton)(({ theme }) => ({
-  color: theme.palette.secondary.main,
+  color: theme.palette.primary.contrastText,
   marginRight: '10px'
 }));
 
 const NotificationIconButton = styled(IconButton)(({ theme }) => ({
-  color: theme.palette.secondary.main,
+  color: theme.palette.primary.contrastText,
   marginRight: '10px'
 
 }));
@@ -152,7 +164,7 @@ const Burger = styled(Box)(() => ({
 }));
 
 const BurgerIconButton = styled(IconButton)(({ theme }) => ({
-  color: theme.palette.secondary.main
+  color: theme.palette.primary.contrastText,
 }))
 
 const UserNavigationBox = styled(Box)(() => ({

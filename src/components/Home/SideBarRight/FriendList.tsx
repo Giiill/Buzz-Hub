@@ -54,6 +54,7 @@ const FriendItem = styled(ListItem)(({ theme }) => ({
     cursor: 'pointer',
     transition: 'background-color 0.3s',
     backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.secondary.contrastText,
     '&:hover': {
         backgroundColor: theme.palette.success.main,
 
@@ -68,7 +69,7 @@ const FriendAvatar = styled(Avatar)(() => ({
 }));
 
 
-const FriendName = styled('div')(() => ({
+const FriendName = styled('div')(({theme}) => ({
     fontSize: '16px',
     lineHeight: '22px',
     fontWeight: 'bold',

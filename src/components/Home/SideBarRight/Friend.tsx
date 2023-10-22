@@ -47,6 +47,7 @@ const MainBox = styled(Box)(({ theme }) => ({
 
 const FriendsListToolbar = styled(Toolbar)(({ theme }) => ({
     backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.primary.contrastText,
     boxShadow: '0px 0px 8px 4px #0000006c',
     zIndex: '1'
 }));
@@ -55,10 +56,10 @@ const ButtonFriends = styled(Button)(({ theme }) => ({
     display: 'flex',
     position: 'relative',
     fontSize: '14px',
-    color: theme.palette.primary.main,
     textTransform: 'none',
     fontWeight: 'bold',
     width: '90px',
+    color: theme.palette.secondary.contrastText,
 
 }));
 
@@ -78,16 +79,16 @@ const BadgeNewFriend = styled(Badge)(() => ({
 
 const ButtonArchive = styled(Button)(({ theme }) => ({
     fontSize: '14px',
-    color: theme.palette.primary.main,
     textTransform: 'none',
-    width: '90px'
+    width: '90px',
+    color: theme.palette.secondary.contrastText,
 }));
 
 const ButtonSetting = styled(Button)(({ theme }) => ({
     fontSize: '14px',
-    color: theme.palette.primary.main,
     textTransform: 'none',
-    width: '90px'
+    width: '90px',
+    color: theme.palette.secondary.contrastText,
 }));
 
 const BoxFriendList = styled(List)(({ theme }) => ({
