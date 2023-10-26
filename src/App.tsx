@@ -1,4 +1,4 @@
-import { routeConfig } from './types/Routes';
+import { routeConfig } from "./routes/routeConfig";
 
 
 function App() {
