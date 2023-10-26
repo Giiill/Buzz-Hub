@@ -6,7 +6,7 @@ import { SideBarRight } from '../components/Home/SideBarRight/SideBarRight';
 function HomePage() {
   return (
     <StyledContainer fixed>
-      
+      <SideBarLeft />
       <Content />
       <SideBarRight />
     </StyledContainer>
