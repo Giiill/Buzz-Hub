@@ -9,11 +9,13 @@ import IconButton from '@mui/material/IconButton/IconButton';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import { Typography, styled } from '@mui/material';
-import { useMassagesState } from '../../context/chatContext';
 import { useRef } from 'react';
+import { useChatState, useChatDispatch, ACTION } from '../../context/chatContext/chatContext';
 
 function Chat() {
-  const { inputState, setInputValue, messages, sendMessage } = useMassagesState();
+
+  const chatState = useChatState();
+  const chatDispatch = useChatDispatch();
 
   // Scroll down after sending a message
   // ----------------------------------
@@ -30,7 +32,7 @@ function Chat() {
   // Key handler called when the "Enter" key is pressed.
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
-      handleSendAction(inputState)
+      handleSendAction(chatState.inputState)
     }
   };
   // Click handler for the submit button.
@@ -39,9 +41,10 @@ function Chat() {
   };
   // Function to send a message and scroll down.
   const handleSendAction = (inputState: string) => {
-    sendMessage(inputState);
-    // Delay before scrolling down to ensure correct scrolling after adding a message.
-    setTimeout(scrollToBottom, 0);
+    chatDispatch({ type: ACTION.SEND_MESSAGE, payload: inputState });
+
+    // Прокрутка вниз
+    scrollToBottom();
   };
   // ----------------------------------
   return (
@@ -64,7 +67,7 @@ function Chat() {
         </AvatartAndBurger>
       </HeadersChat>
       <BoxMessages ref={BoxMessagesRef}>
-        {messages.map(message => {
+        {chatState.messages.map(message => {
           return (
             <Message>
               <UserAvatart alt={message.userName} src={message.avatar} />
@@ -89,13 +92,17 @@ function Chat() {
         <MessageInputField
           placeholder='Write a message...'
           onKeyDown={handleKeyPress}
-          value={inputState}
+          value={chatState.inputState}
           onChange={(e) =>
-            setInputValue(e.target.value)} />
+            chatDispatch({
+              type: ACTION.SET_INPUT_STATE, payload: {
+                inputState: e.target.value
+              }
+            })} />
         <ButtonSendMessage
           variant="contained"
           endIcon={<IconSendMessage />}
-          onClick={() => handleKeyClick(inputState)}>
+          onClick={() => handleKeyClick(chatState.inputState)}>
           Send
         </ButtonSendMessage>
       </EnteringMessage>
@@ -232,7 +239,7 @@ const EnteringMessage = styled(Box)(({ theme }) => ({
 const AddReaction = styled(Button)(({ theme }) => ({
   height: '40px',
   minWidth: '40px',
-  borderRadius: '50%',  
+  borderRadius: '50%',
   '&:focus': {
     color: theme.palette.primary.main,
   }

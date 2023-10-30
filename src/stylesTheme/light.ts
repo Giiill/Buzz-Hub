@@ -17,36 +17,3 @@ const lightTheme = createTheme({
 });
 
 export { lightTheme };
-
-
-
-/*
-const light = createTheme({
-    palette: {
-        primary: {
-            main: '#0050B3',
-        },
-        secondary: {
-            main: '#FFFFFF',
-        },
-        success: {
-            main: '#c7c7c7',
-        },
-    },
-});
-
-
-const light = createTheme({
-    palette: {
-        primary: {
-            main: '#595959',
-        },
-        secondary: {
-            main: '#212121',
-        },
-        success: {
-            main: '#ababab',
-        },
-    },
-});
-*/
