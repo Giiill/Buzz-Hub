@@ -2,7 +2,7 @@ import { imgConfig } from "../../assets/imgConfig";
 import { useReducer } from "react"
 import { useUserState } from "../../hooks/useUserState";
 
-// Defining types
+// DEFINING TYPES
 // ======================================================
 // ======================================================
 type Message = {
@@ -28,13 +28,16 @@ export type Action = {
 // ======================================================
 
 
-// Defining Actions
+// DEFINING ACTIONS
+// ======================================================
 // ======================================================
 const ACTION = {
     SET_USER_NAME: 'SET_USER_NAME',
     SET_INPUT_STATE: 'SET_INPUT_STATE',
     SEND_MESSAGE: 'SEND_MESSAGE',
+    LOAD_MESSAGES: 'LOAD_MESSAGES'
 };
+// ======================================================
 // ======================================================
 
 const reducer = (state: State, action: Action) => {
@@ -60,9 +63,19 @@ const reducer = (state: State, action: Action) => {
                 postDate: new Date().toLocaleString(),
                 isEdit: false,
             };
+            const newMessages = [...state.messages, newMessage];
+
+            // Saving new messages to local storage
+            localStorage.setItem('messagesData', JSON.stringify(newMessages));
             return {
                 ...state,
-                messages: [...state.messages, newMessage], inputState: ''
+                messages: newMessages, inputState: '',
+
+            };
+        case ACTION.LOAD_MESSAGES:
+            return {
+                ...state,
+                messages: payload
             };
         default:
             return state

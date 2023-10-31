@@ -9,16 +9,21 @@ import IconButton from '@mui/material/IconButton/IconButton';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import { Typography, styled } from '@mui/material';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useChatState, useChatDispatch, ACTION } from '../../context/chatContext/chatContext';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 function Chat() {
 
+  // Getting chat and dispatcher state from context
   const chatState = useChatState();
   const chatDispatch = useChatDispatch();
 
-  // Scroll down after sending a message
-  // ----------------------------------
+  // SCROLL DOWN AFTER SENDING A MESSAGE
+  // ====================================================================================
+  // ====================================================================================
+
+  // Link to DOM element for scrolling down
   const BoxMessagesRef = useRef<HTMLDivElement>(null);
 
   // Scroll down function after sending a message.
@@ -35,18 +40,51 @@ function Chat() {
       handleSendAction(chatState.inputState)
     }
   };
+
   // Click handler for the submit button.
   const handleKeyClick = (inputState: string) => {
     handleSendAction(inputState)
   };
+
   // Function to send a message and scroll down.
   const handleSendAction = (inputState: string) => {
     chatDispatch({ type: ACTION.SEND_MESSAGE, payload: inputState });
-
-    // Прокрутка вниз
-    scrollToBottom();
+    // Delay before scrolling down to ensure correct scrolling after adding a message.
+    setTimeout(scrollToBottom, 0);
   };
-  // ----------------------------------
+  // ====================================================================================
+  // ====================================================================================
+
+  // RETRIEVING DATA FROM LOCAL STORAGE AND UPDATING CHAT STATE
+  // ====================================================================================
+  // ====================================================================================
+  
+  // use the useLocalStorage hook to get data from local storage
+  const { value, setValue } = useLocalStorage('messagesData', chatState.messages);
+
+  const loadDataFromLocalStorage = () => {
+    const messagesDataFromLocalStorage = localStorage.getItem('messagesData');
+    if (messagesDataFromLocalStorage) {
+      try {
+        const messagesDataObj = JSON.parse(messagesDataFromLocalStorage);
+
+        // Load messages from local storage and update chat status
+        chatDispatch({ type: ACTION.LOAD_MESSAGES, payload: messagesDataObj });
+      } catch (error) {
+        console.log('Ошибка разбора JSON:', error);
+      }
+    }
+  };  
+
+  // loading data from local storage when mounting a component
+  useEffect(() => {
+    loadDataFromLocalStorage();
+  }, []);
+  // ====================================================================================
+  // ====================================================================================
+
+
+
   return (
     <MainBox>
       <HeadersChat>
