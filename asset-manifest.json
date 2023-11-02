@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Buzz-Hub/static/css/main.90f6920e.css",
-    "main.js": "/Buzz-Hub/static/js/main.0d3897ac.js",
+    "main.js": "/Buzz-Hub/static/js/main.2551107a.js",
     "static/media/Owen Lars.jpg": "/Buzz-Hub/static/media/Owen Lars.abbfaf5e2706e4245760.jpg",
     "static/media/Darth Vader.jpg": "/Buzz-Hub/static/media/Darth Vader.700d97426378fd46bffe.jpg",
     "static/media/Babi Yoda.jpg": "/Buzz-Hub/static/media/Babi Yoda.2557fa0ea016f6b9c1ee.jpg",
@@ -15,10 +15,10 @@
     "static/media/Beru Whitesun lars.jpg": "/Buzz-Hub/static/media/Beru Whitesun lars.ae7060bccb1bb807d16d.jpg",
     "index.html": "/Buzz-Hub/index.html",
     "main.90f6920e.css.map": "/Buzz-Hub/static/css/main.90f6920e.css.map",
-    "main.0d3897ac.js.map": "/Buzz-Hub/static/js/main.0d3897ac.js.map"
+    "main.2551107a.js.map": "/Buzz-Hub/static/js/main.2551107a.js.map"
   },
   "entrypoints": [
     "static/css/main.90f6920e.css",
-    "static/js/main.0d3897ac.js"
+    "static/js/main.2551107a.js"
   ]
 }
