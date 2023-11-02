@@ -9,14 +9,21 @@ import IconButton from '@mui/material/IconButton/IconButton';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import { Typography, styled } from '@mui/material';
-import { useMassagesState } from '../../context/chatContext';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { useChatState, useChatDispatch, ACTION } from '../../context/chatContext/chatContext';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 function Chat() {
-  const { inputState, setInputValue, messages, sendMessage } = useMassagesState();
 
-  // Scroll down after sending a message
-  // ----------------------------------
+  // Getting chat and dispatcher state from context
+  const chatState = useChatState();
+  const chatDispatch = useChatDispatch();
+
+  // SCROLL DOWN AFTER SENDING A MESSAGE
+  // ====================================================================================
+  // ====================================================================================
+
+  // Link to DOM element for scrolling down
   const BoxMessagesRef = useRef<HTMLDivElement>(null);
 
   // Scroll down function after sending a message.
@@ -30,20 +37,54 @@ function Chat() {
   // Key handler called when the "Enter" key is pressed.
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
-      handleSendAction(inputState)
+      handleSendAction(chatState.inputState)
     }
   };
+
   // Click handler for the submit button.
   const handleKeyClick = (inputState: string) => {
     handleSendAction(inputState)
   };
+
   // Function to send a message and scroll down.
   const handleSendAction = (inputState: string) => {
-    sendMessage(inputState);
+    chatDispatch({ type: ACTION.SEND_MESSAGE, payload: inputState });
     // Delay before scrolling down to ensure correct scrolling after adding a message.
     setTimeout(scrollToBottom, 0);
   };
-  // ----------------------------------
+  // ====================================================================================
+  // ====================================================================================
+
+  // RETRIEVING DATA FROM LOCAL STORAGE AND UPDATING CHAT STATE
+  // ====================================================================================
+  // ====================================================================================
+  
+  // use the useLocalStorage hook to get data from local storage
+  const { value, setValue } = useLocalStorage('messagesData', chatState.messages);
+
+  const loadDataFromLocalStorage = () => {
+    const messagesDataFromLocalStorage = localStorage.getItem('messagesData');
+    if (messagesDataFromLocalStorage) {
+      try {
+        const messagesDataObj = JSON.parse(messagesDataFromLocalStorage);
+
+        // Load messages from local storage and update chat status
+        chatDispatch({ type: ACTION.LOAD_MESSAGES, payload: messagesDataObj });
+      } catch (error) {
+        console.log('Ошибка разбора JSON:', error);
+      }
+    }
+  };  
+
+  // loading data from local storage when mounting a component
+  useEffect(() => {
+    loadDataFromLocalStorage();
+  }, []);
+  // ====================================================================================
+  // ====================================================================================
+
+
+
   return (
     <MainBox>
       <HeadersChat>
@@ -64,7 +105,7 @@ function Chat() {
         </AvatartAndBurger>
       </HeadersChat>
       <BoxMessages ref={BoxMessagesRef}>
-        {messages.map(message => {
+        {chatState.messages.map(message => {
           return (
             <Message>
               <UserAvatart alt={message.userName} src={message.avatar} />
@@ -89,13 +130,17 @@ function Chat() {
         <MessageInputField
           placeholder='Write a message...'
           onKeyDown={handleKeyPress}
-          value={inputState}
+          value={chatState.inputState}
           onChange={(e) =>
-            setInputValue(e.target.value)} />
+            chatDispatch({
+              type: ACTION.SET_INPUT_STATE, payload: {
+                inputState: e.target.value
+              }
+            })} />
         <ButtonSendMessage
           variant="contained"
           endIcon={<IconSendMessage />}
-          onClick={() => handleKeyClick(inputState)}>
+          onClick={() => handleKeyClick(chatState.inputState)}>
           Send
         </ButtonSendMessage>
       </EnteringMessage>
@@ -196,8 +241,9 @@ const UserAvatart = styled(Avatar)(() => ({
   boxShadow: "0px 0px 8px 3px #0000006c",
 }));
 
-const MessageText = styled(Box)(() => ({
-  paddingLeft: '10px'
+const MessageText = styled(Box)(({ theme }) => ({
+  paddingLeft: '10px',
+  color: theme.palette.secondary.contrastText
 }));
 
 const BoxUserNameAndPostDate = styled(Box)(() => ({
@@ -231,7 +277,7 @@ const EnteringMessage = styled(Box)(({ theme }) => ({
 const AddReaction = styled(Button)(({ theme }) => ({
   height: '40px',
   minWidth: '40px',
-  borderRadius: '50%',  
+  borderRadius: '50%',
   '&:focus': {
     color: theme.palette.primary.main,
   }
@@ -262,11 +308,12 @@ const AttachFileIcon = styled(AttachEmailIcon)(({ theme }) => ({
 const MessageInputField = styled(Input)(({ theme }) => ({
   width: '100%',
   backgroundColor: theme.palette.secondary.main,
+  color: theme.palette.secondary.contrastText
 }));
 
 const ButtonSendMessage = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-  color: theme.palette.secondary.main,
+  color: theme.palette.primary.contrastText,
   height: '25px',
   marginRight: '10px',
   "&:hover": {

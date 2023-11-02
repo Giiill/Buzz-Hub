@@ -8,7 +8,7 @@ type UserContextType = {
 
 const UserContext = createContext<UserContextType>({ data: {}, isLoading: true, userName: '' });
 
-const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
+const UserProvider = ({ children }: PropsWithChildren) => {
   const [data, setData] = useState();
   const userName = 'Niki';
 

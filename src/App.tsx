@@ -1,26 +1,12 @@
-import { routeConfig } from './types/Routes';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { routeConfig } from "./routes/routeConfig";
+
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <>
       {routeConfig}
-    </ThemeProvider>
+    </>
   );
 };
 
 export { App };
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#0050B3',
-    },
-    secondary: {
-      main: '#FFFFFF',
-    },
-    success: {
-      main: '#c7c7c7',
-    },
-  },
-});
