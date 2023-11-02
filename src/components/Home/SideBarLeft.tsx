@@ -1,13 +1,14 @@
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material';
+import { ERoutes } from '../../routes/routeDefinitions';
 
 function SideBarLeft() {
   return (
     <MainBox>
-      <Link to="/messages">messages</Link>
+      <Link to={ERoutes.Messages}>messages</Link>
       <br></br>
-      <Link to="/">home</Link>
+      <Link to={ERoutes.HomePage}>home</Link>
     </MainBox>
   );
 }
