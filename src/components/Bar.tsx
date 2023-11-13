@@ -14,19 +14,10 @@ import Switch from '@mui/material/Switch';
 import { useThemeState } from '../hooks/useThemeState';
 import { useRef } from 'react';
 
-import { useDispatch } from 'react-redux';
-import { counterSliceActions } from '../store/counterSlice/counterSlice';
-import { CounterInput } from '../store/counterSlice/CounterInput';
-import { Increment } from '../store/counterSlice/Increment';
-import { Decrement } from '../store/counterSlice/Decrement';
-
 function Bar() {
   const { userName } = useUserState();
   const { theme, state, toggleTheme } = useThemeState();
   const formControlLabelRef = useRef<HTMLDivElement>(null);
-
-  const { increment, decrement, setValue } = counterSliceActions;
-  const dispatch = useDispatch();
 
   return (
     <MainBox >
@@ -39,9 +30,6 @@ function Bar() {
           inputProps={{ 'aria-label': 'search' }}
         />
       </Search>
-      <Increment onClick={() => dispatch(increment())} />
-      <CounterInput></CounterInput>
-      <Decrement onClick={() => dispatch(decrement())} />
       <SeparatorBox />
       <UserNavigationBox sx={{ display: { xs: 'none', md: 'flex' } }}>
         <FormControlLabel

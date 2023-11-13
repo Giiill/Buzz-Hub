@@ -1,17 +1,14 @@
 import { Container, styled } from "@mui/material";
 import { SideBarLeft } from '../components/Home/SideBarLeft';
-import { Chat } from '../components/Messages/Chat';
-import { ChatProvider } from "../context/chatContext/chatContext";
+import { Chat } from '../components/Messages/Chat/Chat';
 
 function MessagesPage() {
   return (
-
-    <ChatProvider>
-      <StyledContainer fixed >
-        <SideBarLeft />
-        <Chat />
-      </StyledContainer>
-    </ChatProvider>)
+    <StyledContainer fixed >
+      <SideBarLeft />
+      <Chat />
+    </StyledContainer>
+  )
 }
 
 export { MessagesPage };
