@@ -8,9 +8,10 @@ type ButtonSendMessageProps = {
     scrollToBottom: () => void;
 };
 
+const { sendMessage } = chatSliceActions;
+
 const ButtonSendMessage = ({ scrollToBottom }: ButtonSendMessageProps) => {
     const dispatch = useDispatch();
-    const { sendMessage } = chatSliceActions;
 
     // Function to send a message
     const handleSendMessage = () => {

@@ -3,46 +3,34 @@ import Avatar from "@mui/material/Avatar";
 import { Typography, styled } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { messagesSelector } from '../../../../store/chat/chatSelectors';
-import { useLocalStorage } from '../../../../hooks/useLocalStorage';
 import { useEffect, useRef } from 'react';
 import { chatSliceActions } from '../../../../store/chat/chatSlice';
+import { useChatLocalStorage } from '../../../../hooks/useChatLocalStorage';
 
 type BoxMessagesProps = {
     scrollRef: React.RefObject<HTMLDivElement>
 };
 
+const { loadMessages } = chatSliceActions;
+
 const BoxMessages = ({ scrollRef }: BoxMessagesProps) => {
     const dispatch = useDispatch();
     const messages = useSelector(messagesSelector);
-    const { loadMessages } = chatSliceActions;
+
 
     // Create a link to the element that we will use for scrolling
     const MessagesRef = scrollRef || useRef<HTMLDivElement>(null);
 
-
     // RETRIEVING DATA FROM LOCAL STORAGE AND UPDATING CHAT STATE
     // ====================================================================================
     // ====================================================================================
-    // use the useLocalStorage hook to get data from local storage
-    const { value, setValue } = useLocalStorage('messagesData', messages);
-
-    const loadDataFromLocalStorage = () => {
-        const messagesDataFromLocalStorage = localStorage.getItem('messagesData');
-        if (messagesDataFromLocalStorage) {
-            try {
-                const messagesDataObj = JSON.parse(messagesDataFromLocalStorage);
-                // Load messages from local storage and update chat status
-                dispatch(loadMessages(messagesDataObj));
-            } catch (error) {
-                console.log('Ошибка разбора JSON: ', error);
-            };
-        };
-    };
+    // use the useChatLocalStorage hook to get data from local storage
+    const { value, setValue } = useChatLocalStorage('messagesData', messages);
 
     // loading data from local storage when mounting a component
     useEffect(() => {
-        loadDataFromLocalStorage();
-    }, []);
+        dispatch(loadMessages(value))
+    }, [MessagesRef]);
     // ====================================================================================
     // ====================================================================================
 

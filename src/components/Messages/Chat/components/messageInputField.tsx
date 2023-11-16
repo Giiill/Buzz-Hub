@@ -9,9 +9,10 @@ type MessageInputFieldProps = {
     scrollToBottom: () => void
 };
 
+const { setInputState, sendMessage } = chatSliceActions;
+
 const MessageInputField = ({ scrollToBottom }: MessageInputFieldProps) => {
     const dispatch = useDispatch();
-    const { setInputState, sendMessage } = chatSliceActions;
     const input = useSelector(messageInputSelector);
 
     // input value change handler
