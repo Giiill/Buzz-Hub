@@ -12,18 +12,12 @@ import { imgConfig } from '../assets/imgConfig';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { useThemeState } from '../hooks/useThemeState';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 function Bar() {
   const { userName } = useUserState();
   const { theme, state, toggleTheme } = useThemeState();
   const formControlLabelRef = useRef<HTMLDivElement>(null);
-
-
-
-  
-
-
 
   return (
     <MainBox >
